@@ -52,6 +52,7 @@ public class BitmapCropTask extends AsyncTask<Void, Void, Throwable> {
 
     private int mCroppedImageWidth, mCroppedImageHeight;
     private int cropOffsetX, cropOffsetY;
+    private int originWidth, originHeight;
 
     public BitmapCropTask(@Nullable Bitmap viewBitmap, @NonNull ImageState imageState, @NonNull CropParameters cropParameters,
                           @Nullable BitmapCropCallback cropCallback) {
@@ -104,8 +105,10 @@ public class BitmapCropTask extends AsyncTask<Void, Void, Throwable> {
         BitmapFactory.decodeFile(mImageInputPath, options);
 
         boolean swapSides = mExifInfo.getExifDegrees() == 90 || mExifInfo.getExifDegrees() == 270;
-        float scaleX = (swapSides ? options.outHeight : options.outWidth) / (float) mViewBitmap.getWidth();
-        float scaleY = (swapSides ? options.outWidth : options.outHeight) / (float) mViewBitmap.getHeight();
+        originWidth = swapSides ? options.outHeight : options.outWidth;
+        originHeight = swapSides ? options.outWidth : options.outHeight;
+        float scaleX = originWidth / (float) mViewBitmap.getWidth();
+        float scaleY = originHeight / (float) mViewBitmap.getHeight();
 
         float resizeScale = Math.min(scaleX, scaleY);
 
@@ -186,7 +189,7 @@ public class BitmapCropTask extends AsyncTask<Void, Void, Throwable> {
         if (mCropCallback != null) {
             if (t == null) {
                 Uri uri = Uri.fromFile(new File(mImageOutputPath));
-                mCropCallback.onBitmapCropped(uri, cropOffsetX, cropOffsetY, mCroppedImageWidth, mCroppedImageHeight);
+                mCropCallback.onBitmapCropped(uri, cropOffsetX, cropOffsetY, mCroppedImageWidth, mCroppedImageHeight, originWidth, originHeight);
             } else {
                 mCropCallback.onCropFailure(t);
             }

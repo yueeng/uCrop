@@ -35,7 +35,7 @@ public class UCrop {
     public static final int RESULT_ERROR = 96;
     public static final int MIN_SIZE = 10;
 
-    private static final String EXTRA_PREFIX = BuildConfig.APPLICATION_ID;
+    private static final String EXTRA_PREFIX = BuildConfig.LIBRARY_PACKAGE_NAME;
 
     public static final String EXTRA_INPUT_URI = EXTRA_PREFIX + ".InputUri";
     public static final String EXTRA_OUTPUT_URI = EXTRA_PREFIX + ".OutputUri";
@@ -51,6 +51,9 @@ public class UCrop {
 
     public static final String EXTRA_MAX_SIZE_X = EXTRA_PREFIX + ".MaxSizeX";
     public static final String EXTRA_MAX_SIZE_Y = EXTRA_PREFIX + ".MaxSizeY";
+
+    public static final String EXTRA_OUTPUT_ORIGIN_WIDTH = EXTRA_PREFIX + ".OriginWidth";
+    public static final String EXTRA_OUTPUT_ORIGIN_HEIGHT = EXTRA_PREFIX + ".OriginHeight";
 
     private Intent mCropIntent;
     private Bundle mCropOptionsBundle;
