@@ -57,6 +57,7 @@ public class BitmapCropTask extends AsyncTask<Void, Void, Throwable> {
 
     private int mCroppedImageWidth, mCroppedImageHeight;
     private int cropOffsetX, cropOffsetY;
+    private int originWidth, originHeight;
 
     public BitmapCropTask(@NonNull Context context, @Nullable Bitmap viewBitmap, @NonNull ImageState imageState, @NonNull CropParameters cropParameters,
                           @Nullable BitmapCropCallback cropCallback) {
@@ -144,6 +145,8 @@ public class BitmapCropTask extends AsyncTask<Void, Void, Throwable> {
         cropOffsetY = Math.round((mCropRect.top - mCurrentImageRect.top) / mCurrentScale);
         mCroppedImageWidth = Math.round(mCropRect.width() / mCurrentScale);
         mCroppedImageHeight = Math.round(mCropRect.height() / mCurrentScale);
+        originWidth = (int) mCurrentImageRect.width();
+        originHeight = (int) mCurrentImageRect.height();
 
         boolean shouldCrop = shouldCrop(mCroppedImageWidth, mCroppedImageHeight);
         Log.i(TAG, "Should crop: " + shouldCrop);
@@ -207,7 +210,7 @@ public class BitmapCropTask extends AsyncTask<Void, Void, Throwable> {
         if (mCropCallback != null) {
             if (t == null) {
                 Uri uri = Uri.fromFile(new File(mImageOutputPath));
-                mCropCallback.onBitmapCropped(uri, cropOffsetX, cropOffsetY, mCroppedImageWidth, mCroppedImageHeight);
+                mCropCallback.onBitmapCropped(uri, cropOffsetX, cropOffsetY, mCroppedImageWidth, mCroppedImageHeight, originWidth, originHeight);
             } else {
                 mCropCallback.onCropFailure(t);
             }

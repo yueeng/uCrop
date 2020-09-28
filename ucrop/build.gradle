@@ -2,12 +2,12 @@ apply plugin: 'com.android.library'
 apply from: '../mavenpush.gradle'
 
 android {
-    compileSdkVersion 28
-    buildToolsVersion '28.0.3'
+    compileSdkVersion 30
+    buildToolsVersion '30.0.2'
 
     defaultConfig {
         minSdkVersion 14
-        targetSdkVersion 28
+        targetSdkVersion 30
         versionCode 25
         versionName "2.2.5-non-native"
 
@@ -35,5 +35,5 @@ dependencies {
     implementation "androidx.appcompat:appcompat:${androidx_appcompat_version}"
     implementation "androidx.exifinterface:exifinterface:${androidx_exifinterface_version}"
     implementation "androidx.transition:transition:${androidx_transition_version}"
-    implementation "com.squareup.okhttp3:okhttp:3.12.1"
+    implementation "com.squareup.okhttp3:okhttp:4.9.0"
 }
