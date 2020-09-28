@@ -145,8 +145,8 @@ public class BitmapCropTask extends AsyncTask<Void, Void, Throwable> {
         cropOffsetY = Math.round((mCropRect.top - mCurrentImageRect.top) / mCurrentScale);
         mCroppedImageWidth = Math.round(mCropRect.width() / mCurrentScale);
         mCroppedImageHeight = Math.round(mCropRect.height() / mCurrentScale);
-        originWidth = (int) mCurrentImageRect.width();
-        originHeight = (int) mCurrentImageRect.height();
+        originWidth = (int) (mCurrentImageRect.width() / mCurrentScale);
+        originHeight = (int) (mCurrentImageRect.height() / mCurrentScale);
 
         boolean shouldCrop = shouldCrop(mCroppedImageWidth, mCroppedImageHeight);
         Log.i(TAG, "Should crop: " + shouldCrop);
